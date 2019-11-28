@@ -1,26 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useFetch } from './hooks';
 
 function Joke() {
-  const [joke, setJoke] = useState({});
-
   const urlChuck = 'https://api.chucknorris.io/jokes/random';
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await axios.get(urlChuck);
-        setJoke(res.data);
-      } catch (error) {
-        console.log(`Error: ${error}`);
-      }
-    }
-    fetchData();
-    // return () => {
-    //   cleanup
-    // };
-  }, []);
-  const { value } = joke;
+  const { value } = useFetch(urlChuck, {});
+
   return (
     <div>
       <h3>Joke</h3>

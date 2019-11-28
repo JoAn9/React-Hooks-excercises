@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useFetch } from './hooks';
 
 function Stories() {
-  const [stories, setStories] = useState([]);
-
   const url = 'https://news-proxy-server.appspot.com/topstories';
 
-  useEffect(() => {
-    async function fetchStories() {
-      try {
-        const res = await axios.get(url);
-        setStories(res.data);
-        console.log(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchStories();
-  }, []);
+  const stories = useFetch(url, []);
 
   return (
     <div className="Stories">
