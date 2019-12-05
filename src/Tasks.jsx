@@ -12,6 +12,11 @@ function Tasks() {
 
   const addTask = () => {
     setTasksList([...tasksList, { id: uuid(), taskText }]);
+    setTaskText('');
+  };
+
+  const handleKeyPress = event => {
+    if (event.key === 'Enter') addTask();
   };
 
   const setTaskCompleted = task => () => {
@@ -19,11 +24,19 @@ function Tasks() {
     setTasksList(tasksList.filter(item => item.id !== task.id));
   };
 
+  const deleteTask = task => () => {
+    setCompletedTasks(completedTasks.filter(item => item.id !== task.id));
+  };
+
   return (
     <div>
       <h3>Tasks</h3>
       <div className="form">
-        <input value={taskText} onChange={updateTaskText} />
+        <input
+          value={taskText}
+          onChange={updateTaskText}
+          onKeyPress={handleKeyPress}
+        />
         <button onClick={addTask}>Add task</button>
       </div>
       <div className="task-list">
@@ -39,7 +52,14 @@ function Tasks() {
       <div className="completed-list">
         {completedTasks.map(item => {
           const { id, taskText } = item;
-          return <div key={id}>{taskText} </div>;
+          return (
+            <div key={id}>
+              {taskText}{' '}
+              <span onClick={deleteTask(item)} className="delete-task">
+                x
+              </span>
+            </div>
+          );
         })}
       </div>
     </div>
