@@ -6,6 +6,11 @@ import Gallery from './Gallery';
 
 function App() {
   const [userQuery, setUserQuery] = useState('');
+  const [showGallery, setShowGallery] = useState(true);
+
+  const toggleGallery = () => {
+    setShowGallery(!showGallery);
+  };
 
   const updateUserQuery = event => {
     setUserQuery(event.target.value);
@@ -38,7 +43,12 @@ function App() {
       <hr />
       <Tasks />
       <hr />
-      <Gallery />
+      <div>
+        {showGallery && <Gallery />}
+        <button onClick={toggleGallery}>
+          {showGallery ? 'Hide' : 'Show'} gallery
+        </button>
+      </div>
       <hr />
       <Stories />
     </div>
