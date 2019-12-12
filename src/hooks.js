@@ -17,3 +17,17 @@ export function useFetch(url, initialValue) {
   }, [url]);
   return result;
 }
+
+export function useDynamicTransition({ delay, length }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex(storedIndex => (storedIndex + 1) % length);
+    }, delay);
+
+    return () => clearInterval(interval);
+  }, [delay, length]);
+
+  return index;
+}
