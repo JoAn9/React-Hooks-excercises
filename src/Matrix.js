@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MATRIX_PICTURES from './data/matrix';
+import { useDynamicTransition } from './hooks';
 
 const minDelay = 10;
 
 function Matrix() {
-  const [index, setIndex] = useState(0);
   const [delay, setDelay] = useState(100);
 
-  useEffect(() => {
-    const interval = setInterval(
-      () => setIndex(storedIndex => (storedIndex + 1) % MATRIX_PICTURES.length),
-      delay
-    );
-    return () => clearInterval(interval);
-  }, [delay]);
+  const index = useDynamicTransition({ delay, length: MATRIX_PICTURES.length });
 
   const handleDelay = event => {
-    console.log(event.target.value);
-    const delay = Number(event.target.value) * 1000;
+    const delay = Number(event.target.value);
     setDelay(delay > minDelay ? delay : minDelay);
   };
 
@@ -26,7 +19,7 @@ function Matrix() {
       <img src={MATRIX_PICTURES[index]} alt="matrix" />
       <div className="multiform">
         <div>
-          Frame transition delay (seconds):{' '}
+          Frame transition delay (miliseconds):{' '}
           <input type="number" onChange={handleDelay} />
         </div>
       </div>
