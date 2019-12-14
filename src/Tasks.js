@@ -1,5 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import uuid from 'uuid';
+
+const initialTasksState = {
+  tasksList: [],
+  completedTasks: [],
+};
+
+const TYPES = {
+  ADD_TASK: 'ADD_TASK',
+  COMPLETE_TASK: 'COMPLETE_TASK',
+  DELETE_TASK: 'DELETE_TASK',
+};
+
+const taskReducer = (state, action) => {
+  const { type, task } = action;
+  switch (type) {
+    case TYPES.ADD_TASK:
+      return {
+        ...state,
+        tasksList: [...state.tasksList, task],
+      };
+    case TYPES.COMPLETE_TASK:
+      return {
+        ...state,
+        completedTasks: [...state.completedTasks, task],
+        tasksList: state.tasksList.filter(item => item.id !== task.id),
+      };
+    case TYPES.DELETE_TASK:
+      return {
+        ...state,
+        completedTasks: state.completedTasks.filter(
+          item => item.id !== task.id
+        ),
+      };
+    default:
+      return state;
+  }
+};
 
 const TASKS_STORAGE_KEY = 'TASKS_STORAGE_KEY';
 
@@ -9,18 +46,15 @@ const storeTasks = tasks => {
 
 const readStoredTasks = () => {
   const tasksMap = JSON.parse(localStorage.getItem(TASKS_STORAGE_KEY));
-  return tasksMap ? tasksMap : { tasksList: [], completedTasks: [] };
+  return tasksMap ? tasksMap : initialTasksState;
 };
 
 function Tasks() {
   const [taskText, setTaskText] = useState('');
-
   const storedTasks = readStoredTasks();
 
-  const [tasksList, setTasksList] = useState(storedTasks.tasksList);
-  const [completedTasks, setCompletedTasks] = useState(
-    storedTasks.completedTasks
-  );
+  const [state, dispatch] = useReducer(taskReducer, storedTasks);
+  const { tasksList, completedTasks } = state;
 
   useEffect(() => {
     storeTasks({ tasksList, completedTasks });
@@ -31,7 +65,7 @@ function Tasks() {
   };
 
   const addTask = () => {
-    setTasksList([...tasksList, { id: uuid(), taskText }]);
+    dispatch({ type: TYPES.ADD_TASK, task: { id: uuid(), taskText } });
     setTaskText('');
   };
 
@@ -40,13 +74,14 @@ function Tasks() {
   };
 
   const setTaskCompleted = task => () => {
-    setCompletedTasks([...completedTasks, task]);
-    setTasksList(tasksList.filter(item => item.id !== task.id));
+    dispatch({ type: TYPES.COMPLETE_TASK, task });
   };
 
   const deleteTask = task => () => {
-    setCompletedTasks(completedTasks.filter(item => item.id !== task.id));
+    dispatch({ type: TYPES.DELETE_TASK, task });
   };
+
+  console.log(state);
 
   return (
     <div>
