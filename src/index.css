@@ -1,3 +1,4 @@
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css?family=Economica|Roboto+Condensed');
 
 body {
@@ -92,6 +93,16 @@ button {
   object-fit: cover;
 }
 
+.Menu {
+  text-align: right;
+  margin: auto 20% 5% auto;
+}
+
 .Jobs {
   text-align: left;
+}
+
+.CreateReaction > span {
+  margin: 5px;
+  cursor: pointer;
 }
