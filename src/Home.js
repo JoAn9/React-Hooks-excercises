@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Joke from './Joke';
 import Stories from './Stories';
 import Tasks from './Tasks';
