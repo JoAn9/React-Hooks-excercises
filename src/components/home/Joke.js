@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFetch } from './hooks';
+import { useFetch } from '../../hooks';
 
 function Joke() {
   const urlChuck = 'https://api.chucknorris.io/jokes/random';

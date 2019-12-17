@@ -4,7 +4,6 @@ import Stories from './Stories';
 import Tasks from './Tasks';
 import Gallery from './Gallery';
 import Matrix from './Matrix';
-import Menu from './Menu';
 
 function Home() {
   const [userQuery, setUserQuery] = useState('');
@@ -29,7 +28,6 @@ function Home() {
   };
   return (
     <div>
-      <Menu />
       <h1>Hello Joanna</h1>
       <h2>What do you want to discover today?</h2>
       <div className="form">

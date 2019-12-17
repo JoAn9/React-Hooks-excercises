@@ -81,8 +81,6 @@ function Tasks() {
     dispatch({ type: TYPES.DELETE_TASK, task });
   };
 
-  console.log(state);
-
   return (
     <div>
       <h3>Tasks</h3>

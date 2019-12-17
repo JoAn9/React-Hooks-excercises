@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import MATRIX_PICTURES from './data/matrix';
-import { useDynamicTransition } from './hooks';
+import MATRIX_PICTURES from '../../data/matrix';
+import { useDynamicTransition } from '../../hooks';
 
 const minDelay = 10;
 

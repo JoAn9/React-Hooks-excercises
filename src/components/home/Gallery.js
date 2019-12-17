@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PICTURES from './data/pictures';
-import { useDynamicTransition } from './hooks';
+import PICTURES from '../../data/pictures';
+import { useDynamicTransition } from '../../hooks';
 
 const SECONDS = 1000;
 const minimumDelay = 1 * SECONDS;
