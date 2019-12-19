@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import Context from '../../context';
 import reducer, { initialState } from '../../state/reducer';
 import PublishMessage from './PublishMessage';
 import MessageBoard from './MessageBoard';
@@ -7,13 +8,13 @@ function Wall() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <div>
+    <Context.Provider value={{ state, dispatch }}>
       <h2>Wall</h2>
       <hr />
-      <PublishMessage dispatch={dispatch} />
+      <PublishMessage />
       <hr />
-      <MessageBoard messages={state.messages} />
-    </div>
+      <MessageBoard />
+    </Context.Provider>
   );
 }
 
