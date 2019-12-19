@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import Context from './context';
 
 export function useFetch(url, initialValue) {
   const [result, setResult] = useState(initialValue);
@@ -30,4 +31,8 @@ export function useDynamicTransition({ delay, length }) {
   }, [delay, length]);
 
   return index;
+}
+
+export function useWallContext() {
+  return useContext(Context);
 }
