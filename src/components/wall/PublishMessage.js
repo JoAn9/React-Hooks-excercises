@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { newMessage } from '../../state/actions';
+import { useWallContext } from '../../hooks';
 
-function PublishMessage({ dispatch }) {
+function PublishMessage() {
+  const { dispatch } = useWallContext();
   const [text, setText] = useState('');
 
   const updateText = event => setText(event.target.value);

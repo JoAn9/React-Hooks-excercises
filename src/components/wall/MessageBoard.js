@@ -1,6 +1,10 @@
 import React from 'react';
+import { useWallContext } from '../../hooks';
 
-function MessageBoard({ messages }) {
+function MessageBoard() {
+  const {
+    state: { messages },
+  } = useWallContext();
   return (
     <ul>
       {messages.map(item => {
