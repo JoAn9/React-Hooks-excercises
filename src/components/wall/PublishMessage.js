@@ -3,13 +3,15 @@ import { newMessage } from '../../state/actions';
 import { useWallContext } from '../../hooks';
 
 function PublishMessage() {
-  const { dispatch } = useWallContext();
+  const {
+    pubsub: { publish },
+  } = useWallContext();
   const [text, setText] = useState('');
 
   const updateText = event => setText(event.target.value);
 
   const publishMessage = () => {
-    dispatch(newMessage(text));
+    publish(newMessage(text));
     setText('');
   };
 
