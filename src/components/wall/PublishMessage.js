@@ -4,6 +4,7 @@ import { useWallContext } from '../../hooks';
 
 function PublishMessage() {
   const {
+    state: { username },
     pubsub: { publish },
   } = useWallContext();
   const [text, setText] = useState('');
@@ -11,7 +12,7 @@ function PublishMessage() {
   const updateText = event => setText(event.target.value);
 
   const publishMessage = () => {
-    publish(newMessage(text));
+    publish(newMessage({ text, username }));
     setText('');
   };
 
