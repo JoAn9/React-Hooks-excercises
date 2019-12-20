@@ -4,6 +4,7 @@ import PubSub from '../../pubsub';
 import reducer, { initialState } from '../../state/reducer';
 import PublishMessage from './PublishMessage';
 import MessageBoard from './MessageBoard';
+import Username from './Username';
 
 const pubsub = new PubSub();
 
@@ -22,6 +23,8 @@ function Wall() {
   return (
     <Context.Provider value={{ state, dispatch, pubsub }}>
       <h2>Wall</h2>
+      <hr />
+      <Username />
       <hr />
       <PublishMessage />
       <hr />
