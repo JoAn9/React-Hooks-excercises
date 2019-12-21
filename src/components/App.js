@@ -9,8 +9,8 @@ function App() {
     <Router>
       <Menu />
       <Switch>
-        <Route exact path={['/home', '/']} component={Home} />
-        <Route exact path="/wall" component={Wall} />
+        <Route exact path={['/wall', '/']} component={Wall} />
+        <Route exact path="/home" component={Home} />
       </Switch>
     </Router>
   );
