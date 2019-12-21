@@ -1,5 +1,6 @@
 import React from 'react';
 import { useWallContext } from '../../hooks';
+import Reaction from './Reaction';
 
 function MessageBoard() {
   const {
@@ -14,6 +15,7 @@ function MessageBoard() {
             <h4>{new Date(timestamp).toLocaleString()}</h4>
             <p>{text}</p>
             <p>- {username ? username : 'anonymus'}</p>
+            <Reaction />
             <hr />
           </li>
         );
