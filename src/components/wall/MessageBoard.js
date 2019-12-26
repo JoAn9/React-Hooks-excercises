@@ -1,10 +1,11 @@
 import React from 'react';
 import { useWallContext } from '../../hooks';
-import Reaction from './Reaction';
+import CreateReaction from './CreateReaction';
+import PublishReactions from './PublishReactions';
 
 function MessageBoard() {
   const {
-    state: { messages },
+    state: { messages, reactionsMap },
   } = useWallContext();
   return (
     <ul>
@@ -15,7 +16,8 @@ function MessageBoard() {
             <h4>{new Date(timestamp).toLocaleString()}</h4>
             <p>{text}</p>
             <p>- {username ? username : 'anonymus'}</p>
-            <Reaction />
+            <CreateReaction messageId={id} />
+            <PublishReactions reactions={reactionsMap[id]} />
             <hr />
           </li>
         );
