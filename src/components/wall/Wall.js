@@ -23,7 +23,6 @@ function Wall() {
   return (
     <Context.Provider value={{ state, dispatch, pubsub }}>
       <h2>Wall</h2>
-      <hr />
       <Username />
       <hr />
       <PublishMessage />
